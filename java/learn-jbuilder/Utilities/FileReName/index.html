@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>JBuilder Project FileReName.jpx</title>
+</head>
+<body>
+<p><img src="../../images/Elvenwarelogo.png"><br>
+</p>
+<p> <strong>Project: </strong>File ReName<br>
+  <strong>Author: </strong><a href="http://www.elvenware.com/charlie">Charlie
+  Calvert</a><br>
+  <strong>Company: </strong><a href="http://www.elvenware.com">Elvenware</a><br>
+  <strong>Help: </strong><a href="../../index.html">index.html</a><br>
+  <strong>Personal Edition: </strong>true<br>
+</p>
+<hr>
+<p> <strong>Description:</strong> Rename long mp3 file names to shorter values
+  and move the new file into the appropriate directory.</p>
+<p>I subscribe to a service called emusic, found at www.emusic.com. When I down
+  load mp3s from this source, and from others like it, I get very long filenames
+  of this type:</p>
+<p>Some_Artist-Some-Album-TrackNum-Song_Name.mp3</p>
+<p>This program shortens these names by creating these directories:</p>
+<p>Some_Artist</p>
+<p>Some_Artist/Some_Album</p>
+<p>And then renames the file and moves it into the created directory:</p>
+<p>Some_Artist/Some_Album/Song_Name.mp3</p>
+<p>This project uses CodeBox. You can read about CodeBox in the book itself, or
+  in the readme for the source to this book.</p>
+<p>This is an example of program that relies entirely on events and interfaces.
+  None of the objects ever directly call one another. There is no shared data
+  between the main objects in the program, other than the data needed by Frame1
+  to create instances of the objects that will be in play. But Frame1 itself is
+  not in play. All it does is instantiate other objects, it never does anything
+  itself other than host the objects.<br>
+</p>
+<p>This model adds robustness to your program, and it makes each object discreet.
+  However, there is a price you have to pay for handling things this way. In particular,
+  if the user changes any data in the program, then all interested parties need
+  to be notified via events. One object can't simply ask another object for its
+  current state. Instead, if one object changes, then it tells the other objects
+  that it has changed. Furthermore, only one object can &quot;own&quot; that data,
+  and it must be the only object allowed to modify it.<br>
+</p>
+<p>For an instance of this, see the way that FileHandler sends an ActionEvent
+  to both ControlPanel and DisplayData when the user selects a new directory.
+  To make this work, you have to ensure that neither ControlPanel nor DisplayData
+  have the ability to change this data. Only one object should be able to change
+  the data, and it should tell other objects when that data has changed. If you
+  don't obey these rules, then you have chaos.<br>
+</p>
+<hr><table border="0">
+<tr><th align="left" valign="top">Title:</th><td align="left" valign="top">
+<!-- Type Title below -->
+
+</td></tr>
+<tr><th align="left" valign="top">Author:</th><td align="left" valign="top">
+<!-- Type Author below -->
+Charlie Calvert
+</td></tr>
+<tr><th align="left" valign="top">Company:</th><td align="left" valign="top">
+<!-- Type Company below -->
+Elvenware
+</td></tr>
+<tr><th align="left" valign="top">Description:</th><td align="left" valign="top">
+<!-- Type Description below -->
+
+</td></tr>
+</table><hr>
+<h2>Things to do... </h2>
+<ol>
+<!-- Edit this section to keep track of your to do items -->
+<li>First
+<li>Second
+</ol>
+</body>
+</html>

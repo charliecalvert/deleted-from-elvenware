@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Elvenware Project MyCardLayout</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<p><img src="../../images/Elvenwarelogo.png"><br>
+</p>
+<p> <strong>Project: </strong>MyCardLayout<br>
+  <strong>Author: </strong>
+	<a href="http://www.elvenware.com/charlie">Charlie Calvert</a><br>
+  <strong>Company: </strong>
+	<a href="http://www.elvenware.com">Elvenware</a><br>
+  <strong>Help: </strong>
+	<a href="../../index.html">index.html</a><br>
+  <strong>Personal Edition: </strong>true<br>
+</p>
+<hr>
+
+<p> <strong>Description: </strong>This program illustrates CardLayout.</p>
+<hr>
+<p>This program is discussed in Chapter 13, on layouts and menus.</p>
+
+<applet
+  archive  = "MyCardLayoutApplet.jar"
+  code     = "mycardlayout.MyCardLayoutApplet.class"
+  name     = "TestApplet"
+  width    = "200"
+  height   = "25"
+  hspace   = "0"
+  vspace   = "0"
+  align    = "middle"
+>
+</applet>
+
+<pre>
+	void previousButton_actionPerformed(ActionEvent e)
+	{
+		myCardLayout.previous(cardPanel);
+	}
+
+	void firstButton_actionPerformed(ActionEvent e)
+	{
+		myCardLayout.first(cardPanel);
+	}
+
+	void lastButton_actionPerformed(ActionEvent e)
+	{
+		myCardLayout.last(cardPanel);
+	}
+
+	void nextButton_actionPerformed(ActionEvent e)
+	{
+		myCardLayout.next(cardPanel);
+	}
+
+	void orangeButton_actionPerformed(ActionEvent e)
+	{
+		myCardLayout.show(cardPanel, "orangePanel");
+	}</pre>
+</body>
+</html>

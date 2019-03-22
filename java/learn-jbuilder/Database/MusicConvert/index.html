@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta http-equiv="Content-Type" content=
+"text/html; charset=iso-8859-1">
+<title>Elvenware Project MusicConvert</title>
+</head>
+<body bgcolor="#FFFFFF">
+<p><img alt="" src="../../images/Elvenwarelogo.png"><br>
+</p>
+
+<p><strong>Project:</strong> MusicConvert<br>
+ <strong>Author:</strong> <a href=
+"http://www.elvenware.com/charlie">Charlie Calvert</a><br>
+ <strong>Company:</strong> <a href=
+"http://www.elvenware.com">Elvenware</a><br>
+ <strong>Help:</strong> <a href=
+"../../index.html">index.html</a><br>
+</p>
+
+<hr>
+<p><strong>Description:</strong></p>
+
+<hr>
+<p>This program is discussed in Chapter 39, on database setup, and in chapter 
+  41, on database basics. It's purpose is to convert data from InterBase or MySQL 
+  format to simple text based files. The files can be either filled with SQL statements, 
+  or they can be filled with commad delimited data. The data is written automatically 
+  to a subdirectory of your home directory called <b>elvenware</b>:</p>
+<ul>
+  <li>c:\documents and settings\user name\elvenware</li>
+  <li>\home\user name\elvenware</li>
+</ul>
+<p>By pressing the <b>Text Convert </b>button you ask the program to convert data 
+  to comma delimited format using the Borland database tools. There is a schema 
+  file associated with the text file that describes the fields and their names. 
+  These files can be read back in and converted into normal database tables. See 
+  the ConvertToSQL.java file in the <b>com.elvenware.database</b> package. The 
+  program is interesting because it reads the metadata from a table.</p>
+<p>If you have trouble running this program, <a href=
+"../../index.html">index.html</a> contains useful information about setting up 
+  the code that comes with this book. Setting up databases is described at lengh 
+  in the first few chapters of the database section of the book.</p>
+
+<p>This program relies on an InterBase database called
+music2.gdb. It ships on the CD that comes with this book in the
+/Database/Data directory. You should place this file in a
+directory called data which is beneath the home directory on your
+system. For windows, the home directory is usually in
+c:\Documents and Directories\UserName. On Linux, it is in the
+/home/UserName. For instance, the file should be placed in:</p>
+
+<pre>
+/home/ccalvert/data/music2.gdb
+</pre>
+</body>
+</html>
+
+

@@ -1,0 +1,305 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<TITLE>Elvenwares Project FloatOps</TITLE>
+</HEAD>
+<BODY>
+<p><img src="../../images/Elvenwarelogo.png"><br>
+</p>
+<p> <strong>Project: </strong>FloatOps<br>
+  <strong>Author: </strong><a href="http://www.elvenware.com/charlie">Charlie
+  Calvert</a><br>
+  <strong>Company: </strong><a href="http://www.elvenware.com">Elvenware</a><br>
+  <strong>Help: </strong><a href="../../index.html">index.html</a><br>
+  <strong>Personal Edition: </strong>true<br>
+</p>
+<hr>
+<p> <strong>Description: </strong></p>
+<h3>Math Operators and Floating Point Numbers</h3>
+<p class=MsoNormal>In this section of the chapter you will learn how to use operators
+  with floating point numbers. To do this, I will create another example application.
+  This application will let you work with floating point numbers, and it will
+  allow you to learn a good deal more about the JList class.</p>
+<p class=MsoNormal>The basic concept of this application, which is called floatops,
+  is that the user can display a few rows of numbers in a JList on the left, move
+  a certain percentage of those numbers to the JList on the right, and then perform
+  operations on those numbers in the list on the right. For instance, he can add
+  them all up, or multiply them together. An example of adding the numbers in
+  the right hand list together is shown in Figure 5.</p>
+<p class=MsoNormal></p>
+
+<p class=MsoNormal><b>Figure 5: Adding a list of numbers.</b>&nbsp;</p>
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'>I
+  could have foregone the left-hand JList altogether and had the user type things
+  directly into the right-hand JList. But at this stage we are just having a bit
+  of instructive fun, and are not yet to the stage where we want to struggle with
+  the act of creating a user-friendly program that might do something useful in
+  the real world.</p>
+<p class=MsoNormal>Here is how we can add a series of randomly chosen floating
+  points numbers to a JList:</p>
+<pre><span style='mso-spacerun:yes'>  </span>void fillListMenuItem_actionPerformed(ActionEvent e)</pre>
+<pre><span style='mso-spacerun:yes'>  </span>{</pre>
+<pre><span style='mso-spacerun:yes'>    </span>for (int i = 0; i &lt; 10; i++)</pre>
+<pre><span style='mso-spacerun:yes'>    </span>{</pre>
+<pre><span style='mso-spacerun:yes'>      </span>Double D = new Double(Math.random() * 100.0);</pre>
+<pre><span style='mso-spacerun:yes'>      </span>listModel.addElement(D);</pre>
+<pre><span style='mso-spacerun:yes'>    </span>}</pre>
+<pre><span style='mso-spacerun:yes'>  </span>}</pre>
+<p class=MsoNormal>This code might seem a bit peculiar at first. In particular,
+  you might expect that it should look like this:</p>
+<pre><o:p>&nbsp;</o:p></pre>
+<pre><span style='mso-spacerun:yes'>  </span>void fillListMenuItem_actionPerformed(ActionEvent e)</pre>
+<pre><span style='mso-spacerun:yes'>  </span>{</pre>
+<pre><span style='mso-spacerun:yes'>    </span>for (int i = 0; i &lt; 10; i++)</pre>
+<pre><span style='mso-spacerun:yes'>    </span>{</pre>
+<pre><span style='mso-spacerun:yes'>      </span>String S = Double.toString(Math.random() * 100.0);</pre>
+<pre><span style='mso-spacerun:yes'>      </span>listModel.addElement(S);</pre>
+<pre><span style='mso-spacerun:yes'>    </span>}</pre>
+<pre><span style='mso-spacerun:yes'>  </span>}</pre>
+<p class=MsoNormal>The first example of the <b>fillListMenuItem</b> handler works
+  with <b>doubles</b>, and the second works with <b>strings</b>. Both examples
+  compile and perform as expected in Java. I tend to think of the elements in
+  a list box as strings. But as you can see, in this case we are able to add either
+  <b>Doubles</b> or <b>Strings</b> to the list of elements displayed in the JList.
+  The doubles themselves are actually stored in the list, but the double toString
+  method is used to display a value in the list to the user in the JList.</p>
+<p class=MsoNormal>You have to be careful here, and note that the code adds objects
+  of type <b>Double</b> to the <b>DefaultListModel</b>, and not variables of type
+  <b>double</b>. The point here is that the <b>addElement</b> method of the <b>DefaultListModel</b>
+  object takes variables of type <b>Object</b>. All the Java classes descend from
+  class <b>Object</b>. Furthermore, all the Java classes implement a method called
+  <b>toString</b>. This means that no matter what kind of class you put in the
+  <b>DefaultListModel</b>, it should, at least in theory, be able to display itself
+  in the <b>JList</b> class.</p>
+<p class=MsoNormal>I like this kind of technology a lot, but it requires that
+  developers are able to think at a fairly high level of abstraction. Objects
+  are inherently abstract entities, and it takes awhile to get used to thinking
+  about them in the right spirit.</p>
+<p class=MsoNormal>Let us now revisit the code in the <b>fillListMenuItem</b>
+  response method, and see how the list of doubles is made visible to the user.
+  The code begins by creating a double with a random value between 0 and 100:</p>
+<pre>Double D = new Double(Math.random() * 100.0);</pre>
+<p class=MsoNormal>The <b>Math.random</b> method returns a value between 0.0 and
+  1.0. If you multiply the random value by 100, then you end up with a number
+  between 0.0 and 100.0.</p>
+<p class=MsoNormal>Once you have a new random value to work with, you need to
+  convert it into an object of type <b>Double</b>, or, perhaps more accurately,
+  you need to wrap it up inside an object of type <b>Double</b>. </p>
+<p class=note>NOTE: As I said earlier, object oriented code is tricky to think
+  about at times. An object of type <b>Double</b> is meant to fairly seamlessly
+  wrap the type <b>double</b>. As a result, you should be able to think of a <b>Double</b>
+  as a <b>double</b>, and treat it pretty much the same way in your code. C++,
+  in fact, makes it possible for you to create a class <b>Double</b> such that
+  there are almost no distinctions between a variable of type <b>double</b> and
+  an object of type <b>Double</b>. This is in large part due to the presence in
+  C++ of operator overloading, which is an extraordinarily powerful tool. In the
+  right hands, operator overloading can produce miracles. Unfortunately, in the
+  wrong hands, operator overloading creates chaos. The odds that any one programmer
+  will make good use of operator overloading were a bit low in the opinion of
+  the creators of Java, so they decided to leave operator overloading out of the
+  language. The end result is that you have to think more consciously of the object
+  <b>Double</b> as an object, and can't merely think of it as a fancy variable
+  of type double that knows how to do all kinds of neat tricks. In particular,
+  you have to explicitly call its toString, valueOf, toInt, toShort, and so on,
+  methods. Explicit calls to these methods would not usually be necessary in a
+  language that supports operator overloading. However, the Java syntax is very
+  clean, intuitive, and unlikely to produce hard to resolve bugs. Hurray for Java.</p>
+<p class=MsoNormal>The next part of your job is to add the random number that
+  you created to the JList:</p>
+<pre>listModel.addElement(D);</pre>
+<p class=MsoNormal>By now, you should be able to fully appreciate the implications
+  of being able to add objects of type double to this list rather than having
+  to work with objects of type string. The end result is shown in Figure 6.</p>
+<p class=figure>Figure 6: A list of doubles displayed in a JList component. You
+  are looking at a list of strings, but internally, the JList is really maintaining
+  a list of Doubles.</p>
+<p class=MsoNormal>Here is the whole loop to study once again:</p>
+<pre><span style='mso-spacerun:yes'>  </span><span style='mso-spacerun:yes'>  </span>for (int i = 0; i &lt; 10; i++)</pre>
+<pre><span style='mso-spacerun:yes'>    </span>{</pre>
+<pre><span style='mso-spacerun:yes'>      </span>String S = Double.toString(Math.random() * 100.0);</pre>
+<pre><span style='mso-spacerun:yes'>      </span>listModel.addElement(S);</pre>
+<pre><span style='mso-spacerun:yes'>    </span>}</pre>
+<p class=MsoNormal>The two lines of code inside the block statement that follows
+  the first line of code gets called ten times, one for each count of the variable
+  i between and including the value 0, and up to but excluding the value 10.&nbsp;</p>
+<h3>Moving an Item from One JList to Another</h3>
+<p class=MsoNormal>As you recall, this example program works with two JLists.
+  The list on the left presents the user with a randomly selected group of numbers.
+  By clicking on any one of these numbers the user can move that number from the
+  left hand list to the right hand list. Once it is in the right hand list, the
+  user can perform operations on the numbers, such as addition, or multiplication.</p>
+<p class=MsoNormal>Here is code that will allow you to move one of the items on
+  the left hand JList over to the JList on the right.</p>
+<pre>/** </pre>
+<pre><span style='mso-spacerun:yes'> </span>* Get the selected item and move it from the list on the </pre>
+<pre><span style='mso-spacerun:yes'> </span>* left to the list on the right, deleting it from the list </pre>
+<pre><span style='mso-spacerun:yes'> </span>* on the left. </pre>
+<pre>*/</pre>
+<pre><span style='mso-spacerun:yes'>  </span>void jList1_mouseClicked(MouseEvent e)</pre>
+<pre><span style='mso-spacerun:yes'>  </span>{</pre>
+<pre><span style='mso-spacerun:yes'>    </span>Double D = (Double)listModel.get(jList1.getSelectedIndex());</pre>
+<pre><span style='mso-spacerun:yes'>    </span>listModel.remove(jList1.getSelectedIndex());</pre>
+<pre><span style='mso-spacerun:yes'>    </span>mathList.addElement(D);</pre>
+<pre><span style='mso-spacerun:yes'>  </span>}</pre>
+<p class=MsoNormal>This method will be called when the user clicks on a particular
+  number in the left hand list box. The goal is to delete that number from the
+  <b>JList</b> on the left, and move it to the <b>JList</b> on the right. The
+  first step in this process is to find the number the user selected:</p>
+<pre><o:p>&nbsp;</o:p></pre>
+<pre>Double D = (Double)listModel.get(jList1.getSelectedIndex());</pre>
+<p class=MsoNormal>A call <b style='mso-bidi-font-weight:normal'>to jList1.getSelectedIndex</b>
+  will retrieve the index of the item that the user has selected from the left-hand
+  list. The first element in the list is item 0, the second item 1, and so on.
+  If the user has selected the third item in the list, then <b>getSelectedIndex</b>
+  will return the integer value 2.</p>
+<p class=MsoNormal>A call to <b style='mso-bidi-font-weight:normal'>listModel.get(2)</b>
+  would retrieve the third item in the <b>DefaultListModel</b> object referenced
+  by the identifier <b>listModel</b>. A <b>DefaultListModel</b> works with items
+  of type Object. Object is the root object from which all Java objects descend.
+  So in this case, I must typecast the value returned by a call to the get method.
+  In particular the value is typecast as a Double, which is in fact that type
+  of object we have stored in this list. (Forgive me if I am using a bit of repetition
+  to drive home points that I feel deserve special emphasis.)</p>
+<p class=MsoNormal>The end result of all these peregrinations is a return of the
+  value the user selected with the mouse. The next step is to remove it from the
+  current list, and add it to the list on the right:</p>
+<pre><span style='mso-spacerun:yes'>    </span>listModel.remove(jList1.getSelectedIndex());</pre>
+<pre><span style='mso-spacerun:yes'>    </span>mathList.addElement(D);</pre>
+<p class=MsoNormal>The first line of code here calls the <b>remove</b> method
+  of the <b>DefaultListModel</b> object. As you can see, I pass in the index of
+  the item I want to remove. I get the index by calling jList1.getSelectedIndex.
+  If I had desired to do so, I could have saved the value from my previous call
+  to this method rather than calling it twice. Optimizations of that type are
+  something I would explore if I found the application was performing poorly,
+  and I thought minor changes to the code would rectify the problem. In this case
+  I felt that the program was performing fine, and I felt that a change of this
+  type to the code was very unlikely to significantly alter its performance. In
+  short, I was being lazy.</p>
+<p class=MsoNormal>Once I had deleted the item from the list on the left, I added
+  it to the list on the right by calling the <b>addElement</b> method of the <b>DefaultListModel</b>
+  object. At that stage, I was done with this rather simple operation.</p>
+<h2>Adding Up a List of Numbers</h2>
+<p class=MsoNormal>It is now time to see how to add up or multiply all the numbers
+  in the list on the right. The mechanisms for doing each of these procedures
+  are nearly identical. In particular, both operations involve iterating over
+  all the items in the second list box, then either adding or multiplying the
+  list of items together.</p>
+<p class=MsoNormal>Because the two operations are so nearly identical, I have
+  decided to throw in some variety by presenting two different ways to iterate
+  over the items in the second <b>JList</b>. In the first technique, the one I
+  use when adding the numbers, I show a standard way to iterate over items in
+  a list. In the second example, the one involving multiplication, I show a special
+  kind of iterator that is specific to Java.</p>
+<p class=MsoNormal>Here is code for iterating through all the numbers in the <b>JList</b>
+  on the right and displaying the result:</p>
+<pre><o:p>&nbsp;</o:p></pre>
+<pre><span style='mso-spacerun:yes'>  </span>void addMenuItem_actionPerformed(ActionEvent e)</pre>
+<pre><span style='mso-spacerun:yes'>  </span>{</pre>
+<pre><span style='mso-spacerun:yes'>    </span>double total = 0;</pre>
+<pre><span style='mso-spacerun:yes'>    </span>Double num;</pre>
+<pre><span style='mso-spacerun:yes'>    </span>int Count = mathList.getSize();</pre>
+<pre><span style='mso-spacerun:yes'>    </span>for (int i = 0; i &lt; Count; i++)</pre>
+<pre><span style='mso-spacerun:yes'>    </span>{</pre>
+<pre><span style='mso-spacerun:yes'>     </span><span style='mso-spacerun:yes'> </span>num = (Double)mathList.get(i);</pre>
+<pre><span style='mso-spacerun:yes'>      </span>total = total + num.doubleValue();</pre>
+<pre><span style='mso-spacerun:yes'>    </span>}</pre>
+<pre><span style='mso-spacerun:yes'>    </span>mathList.addElement(&quot;-----------&quot;);</pre>
+<pre><span style='mso-spacerun:yes'>    </span>mathList.addElement(Double.toString(total));</pre>
+<pre><span style='mso-spacerun:yes'>  </span>}</pre>
+<p class=MsoNormal>The code begins by calling the <b>getSize</b> method of the
+  <b>DefaulListModel</b> object to get the number of objects in the list. I then
+  perform a <b>for</b> loop to iterate over each item in the list. The <b>for</b>
+  statement shown here executes <b>Count</b> number of times, with the variable
+  <b>i</b> incrementing from <b>0</b> to <b>Count-1</b> during the life of the
+  <b>for</b> loop.</p>
+<p class=MsoNormal>I call the <b>get</b> method of the <b>DefaultListModel</b>
+  to retrieve the first element in the list. I then add that number to a variable
+  called <b>total</b> that was initially set to zero. If the first item in the
+  list was 1.72, then after the first iteration of the <b>for</b> loop, the value
+  of <b>total</b> gets set to 1.72. Suppose the second time through the loop the
+  value of the <b>double</b> retrieved from the list happened to be 48.28. If
+  that were the case, then after the second time through the loop, <b>total</b>
+  would be equal to 50.0. The process would be repeated each time the loop executed
+  until the program ran out of numbers to add together.</p>
+<p class=MsoNormal>Once the program was out of numbers to add, it would insert
+  a line of hyphens in the list box, and then print out an answer by calling the
+  <b>Double.toString</b> method on the current value of the <b>total </b>variable.
+  (Remember that you can call the <b>toString</b> method of the Double object
+  without creating an instance of it because <b>toString</b> is declared as a
+  static method.)</p>
+<p class=MsoNormal>You might suppose that by this time I have completely forgotten
+  the main topic of this chapter, which is operators. Fortunately, that matter
+  has not entirely slipped my mind, though we certainly have drifted far from
+  the topic at times! At any rate, the main reason you are looking at this code
+  is simply to see that the plus operator works exactly the same way with floating
+  point numbers as it does with integers.&nbsp;</p>
+<h2>Multiplying a list of Numbers Together</h2>
+<p class=MsoNormal>This code will multiply all the numbers in the second list
+  box together, rather than adding them together:</p>
+<pre><o:p>&nbsp;</o:p></pre>
+<pre><span style='mso-spacerun:yes'>  </span>void multiplyMenuItem_actionPerformed(ActionEvent e)</pre>
+<pre><span style='mso-spacerun:yes'>  </span>{</pre>
+<pre><span style='mso-spacerun:yes'>    </span>double total = 1;</pre>
+<pre><span style='mso-spacerun:yes'>    </span>Double num;</pre>
+<pre><span style='mso-spacerun:yes'>    </span>Enumeration mathEnum = mathList.elements();</pre>
+<pre><span style='mso-spacerun:yes'>    </span>while (mathEnum.hasMoreElements())</pre>
+<pre><span style='mso-spacerun:yes'>    </span>{</pre>
+<pre><span style='mso-spacerun:yes'>      </span>num = (Double)mathEnum.nextElement();</pre>
+<pre><span style='mso-spacerun:yes'>      </span>total = total * num.doubleValue();</pre>
+<pre><span style='mso-spacerun:yes'>    </span>}</pre>
+<pre><span style='mso-spacerun:yes'>    </span>mathList.addElement(&quot;-----------&quot;);</pre>
+<pre><span style='mso-spacerun:yes'>    </span>mathList.addElement(Double.toString(total));</pre>
+<pre><span style='mso-spacerun:yes'>  </span>}</pre>
+<pre>}</pre>
+<p class=MsoNormal>This code is very like the code used to add numbers. The main
+  difference, besides the usage of the multiplication operator instead of the
+  addition operator, is the use of an <b>Enumeration</b>.</p>
+<p class=MsoNormal>It happens that the <b>DefaultListModel</b> object is really
+  just a fairly thin wrapper around another important Java object called a <b>Vector</b>.
+  In fact, as you have been learning how to use the <b>DefaultListModel</b>, you
+  have really been learning the basic principles that underlie the Java <b>Vector</b>
+  class.</p>
+<p class=MsoNormal>A vector, as you no doubt know, is just a list, or an array,
+  of items. In our case, we have been working with a vector of <b>Objects</b>,
+  and in particular, a vector of <b>Double</b> objects. In the addition example,
+  we saw how to iterate over the members of that vector, by retrieving each of
+  the <b>Double</b> objects in our list one at a time.&nbsp;</p>
+<p class=MsoNormal>It turns out that the <b>Vector</b> object, and hence the <b>DefaultListModel</b>,
+  has a special means for allowing you to iterate over its members. The code for
+  performing that operation looks like this:</p>
+<pre><span style='mso-spacerun:yes'>    </span>Enumeration mathEnum = mathList.elements();</pre>
+<pre><span style='mso-spacerun:yes'>    </span>while (mathEnum.hasMoreElements())</pre>
+<pre><span style='mso-spacerun:yes'>    </span>{</pre>
+<pre><span style='mso-spacerun:yes'>      </span>mathEnum.nextElement();</pre>
+<pre><span style='mso-spacerun:yes'>      </span>....</pre>
+<pre><span style='mso-spacerun:yes'>    </span>}</pre>
+<p class=MsoNormal>The first line show here calls the elements method of the <b>Vector</b>
+  or <b>DefaultListModel</b> class in order to retrieve an object called an <b>Enumeration</b>.
+  To use the <b>Enumeration</b> object, you must be sure that you first import
+  the java.util.* classes at the top of your java file:</p>
+<pre><o:p></o:p></pre>
+<pre>package floatops;</pre>
+<pre>import java.awt.*;</pre>
+<pre>import java.awt.event.*;</pre>
+<pre>import javax.swing.*;</pre>
+<pre>import java.util.*;</pre>
+<p class=MsoNormal>The <b>Enumeration</b> object has two methods, one called <b>hasMoreElements</b>
+  and the other called <b>nextElement</b>. By using these two methods you can
+  iterate over all the elements in a <b>Vector</b>.</p>
+<p class=MsoNormal>In particular, you write code that says that you should keep
+  calling the <b>nextElement</b> method to retrieve the next element from the
+  list so long as the <b>hasMoreElements</b> method returns true. Remember that
+  a <b>while</b> loop lets you perform a particular operation over and over again,
+  so long as a particular expression evaluates to true.</p>
+<p class=MsoNormal>I won't spend any more time discussing the rest of the code
+  for the multiplication method, since it is so nearly identical to the code for
+  the addition method. If necessary, spend some time studying it until it begins
+  to make sense to you.</p>
+<p class=MsoNormal>I will leave examples of working with the /, - and % operators
+  in a context similar to the ones shown here as an exercise for the reader.&nbsp;</p>
+<hr>
+<p class=MsoNormal><o:p>&nbsp;This program is discussed in Chapter 11, on looping
+  and math operators.</o:p></p>
+<p>&nbsp;</p>
+</BODY>
+</HTML>

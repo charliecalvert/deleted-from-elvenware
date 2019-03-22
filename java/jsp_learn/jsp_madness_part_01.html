@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<h1>JSP Madness Part One by Charlie Calvert</h1>
+<p>Copyright (c) 2003 by Charlie Calvert</p>
+<p>In this article you will learn how to use JBuilder 9 to create a simple JavaServer Page (JSP) application. JSP is a Java based technology that allows you to create web  
+  applications. JSP applications separate the 
+  <em>presentation</em> and <em>business logic</em> layers of your application. 
+  In other words, they employ a model-view-controller architecture 
+  where the <em>model</em> is implemented in Java and the <em>view</em> is implemented in a form of HTML supplimented by a few simple JSP specific tags. 
+</p>
+<p>This article is designed to show how to create simple JavaServer Pages. 
+  Subsequent articles will explore the subject in more depth. </p>
+<p>The text begins with a <a href="#QuickStart">quick start</a> section that steps you through the process of creating a  
+  JSP application using the JBuilder wizard. This quick start section ends with a few sentences describing how to<a href="#TroubleShooting"> trouble shoot</a> the most likely errors which might 
+  have occurred. These errors are likely to be related to the set up of a Tomcat server. </p>
+<p>The middle of the article contains a brief overview of the JavaServer Pages technology. Finally, I will show you 
+  how to modify the default JBuilder JSP application in a few simple ways so that you can begin to 
+  make it do what you want.</p>
+<h2><a name="QuickStart"></a>Quick Start: Creating a JSP Application in JBuilder</h2>
+<p>Open JBuilder and create a new project by choosing <strong>File | New Project</strong>. The dialog containing the JBuilder New Project Wizard is shown in <a href="#Figure01">Figure 1</a>. Click 
+  finish on the first of the three pages of the wizard to accept all the defaults.</p>
+<p>Choose <strong>File | New</strong> from the JBuilder menu. Turn to the <strong>Web</strong> page in the <strong>Object Gallery</strong> and select <strong>JavaServer Page</strong>, as shown in <a href="#Figure02">Figure 2</a>. This option should be available in JBuilder Professional or above. There are five pages in the JSP wizard. For now, just accept all the defaults and click finish on the first page, as shown in <a href="#Figure03">Figure 3</a>.</p>
+<p>You have created a simple, but valid, JavaServer Page. To run the application in JBuilder, right click on <strong>jsp1.jsp</strong> in the project pane and choose <strong>Web run using jsp1</strong> from the pop up menu, as shown in<a href="#Figure04"> Figure 4</a>. If all went well, your application should launch inside the JBuilder content 
+pane, as shown in <a href="#Figure05">Figure 5</a>.</p>
+<p></p>
+<p><a name="Figure01"></a><img src="Figure01.jpg" width="558" height="441"></p>
+<p class="figure">Figure 1: Click finish on this page to accept all the defaults 
+  when creating a new project.</p>
+<p><a name="Figure02"></a><img src="Figure02.jpg" width="698" height="393"></p>
+<p class="figure">Figure 02: Selecting the JavaServer Page from the Object Gallery.</p>
+<p><a name="Figure03"></a><img src="Figure03.jpg" width="558" height="419"></p>
+<p class="figure">Figure 3: Click finish on the first of the five pages of the JSP wizard to 
+  accept all the defaults.</p>
+  
+<p><a name="Figure04"></a><img src="Figure04.jpg" width="801" height="599"></p>
+<p class="figure">Figure 4: Running your bean from inside JBuilder. </p>
+
+<p><a name="Figure05"></a><img src="Figure05.jpg" width="801" height="599"></p>
+<p class="figure">Figure 5: Running a JSP inside of JBuilder. Note that the tab at the bottom 
+  of the IDE says Tomcat 4.0 and the text under content pane says http://localhost:8080/jsp1.jsp.</p>
+  
+<h3><a name="TroubleShooting"></a>Trouble Shooting</h3>
+<p>Everything I've shown you so far is fairly straight forward. The only thing 
+  that might have gone wrong is if you did not have the Tomcat server set up correctly. 
+  Tomcat is one of several servers available which support JavaServer Pages and Java Servlets. It is a free and well implemented server produced by the Jakarta group. It can be found at <a href="http://jakarta.apache.org/tomcat/index.html">http://jakarta.apache.org/tomcat/index.html</a>.</p>
+<p>The regular JBuilder 9 install should have place copies of Tomcat 3.3, 4.0 
+  and 4.1 in a directory called <strong>JBuilder9/thirdparty</strong>, where JBuilder9 
+  is the name of the directory where you installed JBuilder. For instance, on 
+  my system the path to these files is <strong>c:\bin\jb9\thirdparty</strong>, 
+  as shown in <a href="#Figure06">Figure 6</a>.</p>
+<p>Assuming that these files are correctly installed, you should next choose <strong>Tools 
+  | Configure Servers</strong> and ensure that Tomcat is correctly configured. 
+  As shown in <a href="#Figure07">Figure 7</a>, the home directory field should 
+  be set to the location of the Tomcat JDK, which on my systems is <strong>C:\bin\jb9\thirdparty\jakarta-tomcat-4.0.6-LE-jdk14</strong>. 
+  The Main Class field should be set to: <strong>org.apache.catalina.startup.Bootstrap</strong>.</p>
+<p><a name="Figure06"></a><img src="Figure06.jpg" width="549" height="417"></p>
+<p class="figure">Figure 6: A directory listing showing the Tomcat servers automatically installed 
+  with JBuilder.</p>
+<p><img src="Figure07.jpg" width="718" height="726"><a name="Figure07"></a></p>
+<p class="figure">Figure 7: The JBuilder Configure Servers dialog with Tomcat Server 4.0 selected. 
+  Note the reference to the main class: <strong>org.apache.catalina.startup.Bootstrap</strong>, 
+  and to the home directory, which in my case is: <strong>C:\bin\jb9\thirdparty\jakarta-tomcat-4.0.6-LE-jdk14</strong>.</p>
+<p>JBuilder is designed to work only with a certain predefined set of servers. These servers are listed on the left side of the dialog shown in Figure 7. You can install your own copies of any of these servers, and use the <strong>Configure Servers</strong> dialog to point JBuilder toward them.</p>
+<p>Most of the other problems you are likely to have when creating a JBuilder JSP would involve inserting incorrect code. In this example, however, JBuilder generated all the code for you automatically, and so it should be correct. As a result, I won't discuss any syntactic problems that might arise in your code. </p>
+<h2>Understanding JSP Basics </h2>
+<p>JBuilder generated several chunks of code for you when you ran the wizard</p>
+<ul>
+  <li><a href="#Listing01">jsp1.jsp</a>: an HTML file with some special tags embedded in it. This is the <em>view</em> portion of the model/view architecture mentioned at the beginning of this article.. </li>
+  <li><a href="#Listing02">Jsp1Bean.java</a>: Java source code for a bean accessed via the special tags in the <strong>jsp1.jsp</strong> file. This the <em>model</em> part of the model-view architecture. </li>
+  <li><strong>web.xml: </strong>This file is part of the behind the scenes plumbing of your application. It contents are defined by the Java Servlet specification. Over time, these series of articles will explain the connection between Java Servlets, and Java Server Pages.</li>
+  <li><strong>untitled37.war</strong>:This is a JAR (compressed zip) file that contains all the pieces of your application. Again, it is created according to rules defined by the Java Servlet specification. The presence of a single archive containing all the pieces of your application helps make distribution of your application as simple as possible. You can view the contents of this file by opening up the <strong>war</strong> node in the JBuilder project pane. </li>
+</ul>
+<p>Listings 1 and 2 show the source code for the two main files in this simple JSP application. They will be explained further in the text which appears below. </p>
+<p><a name="Listing01"></a>Listing 1: jsp1.jsp</p>
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;
+jsp1
+&lt;/title&gt;
+&lt;/head&gt;
+&lt;jsp:useBean id="jsp1BeanId" scope="session" class="untitled12.Jsp1Bean" /&gt;
+&lt;jsp:setProperty name="jsp1BeanId" property="*" /&gt;
+&lt;body bgcolor="#ffffff"&gt;
+&lt;h1&gt;
+JBuilder Generated JSP
+&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><a name="Listing02"></a>Listing 2: Jsp1Bean.java</p>
+<pre>package untitled12;
+
+public class Jsp1Bean
+{
+  private String sample = "Start value";
+  //Access sample property
+  public String getSample()
+  {
+    return sample;
+  }
+  //Access sample property
+  public void setSample(String newValue)
+  {
+    if (newValue!=null)
+    {
+      sample = newValue;
+    }
+  }
+} </pre>
+<p>When creating your JSP, you can focus primarily on the  two files shown in Listings 1 and 2.. It is these files, and one's like them, that you will modify when creating your application. However, you need to understand that a third file, not listed above, will be generated generated behind the scenes in order to make your application complete. You will never need to edit, and will often not even need to look at, this third file. However, it is the key to the entire JSP technology. After you have compiled and run your  JBuilder project, the generated file will appear in your project hierarchy, in this location: <strong>classes\Generated Source\.jsp\.default.</strong> </p>
+<p>I have implied several times in this section that there is connection between the JSP and Servlet technologies. It happens that a JSP is simply a particular kind of Servlet. Why then do I not begin by talking about Servlets first, and then start talking about Java Server Pages? It turns out that JavaServer Pages are much simpler to create than Java Servlets. In fact, JavaServer Pages can be seen as nothing more than a short cut to creating a Java Servlet. JSPs are designed to be a simple technique that makes it easy to create Servlets. It therefore makes sense to study JSP basics first, and then to move on to an understanding of Servlets. </p>
+<p>Servlets are complicated not because they are difficult to build. In fact, Servlets are quite easy to create. However, Servlets have a tendency to encourage developers to mix their HTML and Java source code in a single file in a series of <strong>println</strong> statements:</p>
+<p>out.println(&quot;&lt;HTML&gt;&lt;BODY&gt;&lt;P&gt;Data&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;&quot;);</p>
+<p>Code of this type can be quite difficult to read if you are working with large amounts of HTML. Furthermore, you cannot easily modify the HTML without changing the source code of your servlet. JSPs are designed to rectify this entire problem by employing a model-view architecture.</p>
+<p>In a JSP, you separate your code into two types of files. On one side, you have HTML files like<strong> jsp1.jsp</strong>. On the other side, you have Java source code, like that found in <strong>Jsp1Bean.java</strong>. Behind the scenes, the Tomcat server will automatically generate a third file whenever you modify your source. This third file is true Java Servlet, and contains a mixture of Java source code and HTML. The whole point of the JSP architecture is to hide the details of this file from you. </p>
+<p>In closing this section, I want to point out there is nothing in the JSP specification which prevents you from putting Java source code in your HTML based jsp file, nor from putting HTML in your Java based beans. The architecture is designed to encourage you to make a clean separation between your presentation layer and your program logic. However, it does not enforce this architecture through a set of immutable syntactical rules. I want to emphasize, however, that your success in working with this paradigm is in large part dependent on your willingness to keep your Java code in one place and your HTML code in another. If you give in to the temptation to mix the two, then you will be forfeiting a major benefit of this technology. </p>
+<h2>Modifying the JSP</h2>
+<p>By this stage you should understand how to create a JSP with JBuilder, and you should have caught some glimpses of the general theory behind the JSP architecture. In future articles, I will expand on this short, general introduction to this extensive topic. To wrap up this article, let's modify the project slightly. </p>
+<p>A modified version of the original JSP page is shown in Listing 3.</p>
+<p class="listing">Listing 3: A single line has been added to the code shown in Listing 1. This single line of code prints out the value of the property called <strong>sample</strong> which is found in the Java bean shown in Listing 2. </p>
+<pre>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;jsp1&lt;/title&gt;
+  &lt;/head&gt;
+  
+&lt;jsp:useBean id=&quot;jsp1BeanId&quot; scope=&quot;session&quot; class=&quot;untitled36.Jsp1Bean&quot;/&gt;
+&lt;jsp:setProperty name=&quot;jsp1BeanId&quot; property=&quot;*&quot; /&gt;
+  
+&lt;body bgcolor=&quot;#ffffff&quot;&gt;
+  
+  &lt;h1&gt;JBuilder Generated JSP foo&lt;/h1&gt;
+<p>  &lt;p&gt;Data from the bean: &lt;jsp:getProperty name=&quot;jsp1BeanId&quot; property=&quot;sample&quot;/&gt;&lt;p&gt;</p><p>&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>First notice the general structure of the file. The HTML, HEAD, BODY, and H1 tags are simple HTML rendered without modification. The first line that looks unusual is this one:</p>
+<pre>&lt;<strong>jsp</strong>:<strong>useBean</strong> <strong>id</strong>=&quot;jsp1BeanId&quot; <strong>scope</strong>=&quot;session&quot; <strong>class</strong>=&quot;untitled36.Jsp1Bean&quot;/&gt;</pre>
+<p>This code uses a simple XML format to render a JSP tag. Notice the reference to the <strong>jsp</strong> namespace, and to the <strong>useBean</strong> tag: <strong>jsp:useBean</strong>. In this case the <strong>useBean</strong> tag has three attributes: <strong>id</strong>, <strong>scope</strong> and <strong>class</strong>. The <strong>class</strong> attribute specifies the name of the <em><strong>bean</strong></em> that you want to <em><strong>use</strong></em>. The <strong>scope</strong> attribute specifies the range over which this tag's definition will be available. In this particular case, the the definition is said to hold true across the entire <em>session</em>. <em>Sessions</em> will be defined in later articles in this series. Finally, the <strong>id</strong> attribute defines a means of referencing this object in other parts of your code. The <strong>id</strong> has much the same functionality here that an identifier or variable declaration would have in a standard programming language such as Java, Pascal or C. The end result of this statement is that we have an <strong>id</strong> called <strong>jsp1BeanId</strong> that references an instance of the Java bean shown in Listing 2. </p>
+<p>After this modification, the application appears as it does in Figure 8. Notice the string in the middle of the output window that reads &quot;Data from the bean: Start Value.&quot; The value before the colon was generated by the HTML in the presentation layer, and the value after the colon was generated by the Java code in the default bean generated by the JBuilder wizard. </p>
+<p><img src="Figure08.jpg" width="566" height="394"></p>
+<p class ="figure">Figure 8: The JSP now accesses the default property in the bean created by JBuilder when you ran the wizard. This property returns the string &quot;Start Value.&quot; </p>
+<p>Here is the part of the jsp page that retrieves the data from the bean: <strong>&lt;jsp:getProperty name=&quot;jsp1BeanId&quot; property=&quot;sample&quot;/&gt;</strong> Notice that this code is in XML format. A namespace called <strong>jsp</strong> is declared, and then there is a reference to the <strong>getProperty</strong> tag. In this instance, the tag supports two attributes called  <strong>name</strong> and <strong>property</strong>. The <strong>name</strong> field specifies the name of the object we want to call, and the <strong>property</strong> field specifies the property on that object that we want to reference. The name of the object to be called is referenced via the <strong>id</strong> property of the<strong> jsp:useBean</strong> tag discussed above. </p>
+<p>To understand this better, take a look at the Java bean itself, which is shown in Listing 2:</p>
+<pre>
+public class Jsp1Bean
+{
+  private String sample = "Start value";
+  // code omitted here
+}
+</pre>
+<p>Here you can see that <strong>Jsp1Bean</strong> has a single property called <strong>sample</strong>. If you look up at listing two, you will see that there are public getter and setter methods for accessing this property. By now you should be able to parse the <strong>getProperty</strong> tag:  <strong>&lt;jsp:getProperty name=&quot;jsp1BeanId&quot; property=&quot;sample&quot;/&gt;.</strong> The code simply references the sample property of an instance of the <strong>Jsp1Bean</strong> class. </p>
+<h2>Modifying the Contents of the Bean</h2>
+<p>Let's add three more lines of code to our jsp file:</p>
+<pre>&lt;form action=&quot;jsp1.jsp&quot; method=&quot;post&quot;&gt;<br>&lt;input type=&quot;text&quot; name=&quot;sample&quot; value=&quot;&lt;jsp:getProperty name=&quot;jsp1BeanId&quot; property=&quot;sample&quot;/&gt;&quot;&gt;<br>&lt;input type=&quot;submit&quot;&gt;</pre>
+<p>After adding this code, at run time the application appears as it does in Figures 9 and 10. The complete source for the modified <strong>jsp</strong> file is shown in Listing 4.</p>
+<p><img src="Figure09.jpg" width="482" height="397"></p>
+<p class="figure">Figure 9: The JSP as it appears in the content pane when first run.</p>
+<p><img src="Figure10.jpg" width="482" height="397"></p>
+<p class="figure">Figure 10: The JSP as it appears after the user has modified one of the fields of the Java Bean by typing in the <strong>input</strong> field. Note that the text above the <strong>submit</strong> button which accesses the <strong>sample</strong> property has been changed. The change occurred when the user pressed the <strong>submit</strong> button. </p>
+<p>Listing 4: The modified source to the JSP.</p>
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;
+jsp1
+&lt;/title&gt;
+&lt;/head&gt;
+&lt;jsp:useBean id="jsp1BeanId" scope="session" class="untitled12.Jsp1Bean" /&gt;
+&lt;jsp:setProperty name="jsp1BeanId" property="*" /&gt;
+&lt;body bgcolor="#ffffff"&gt;
+
+&lt;h1&gt;JBuilder Generated JSP&lt;/h1&gt;
+
+&lt;p&gt;Data from the bean: &lt;jsp:getProperty name="jsp1BeanId" property="sample"/&gt;&lt;p&gt;
+
+&lt;form action="jsp1.jsp" method="post"&gt;
+&lt;input type="text" name="sample" value="&lt;jsp:getProperty name="jsp1BeanId" property="sample"/&gt;"&gt;
+&lt;input type="submit"&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>The new code adds a form to the HTML file. The form references the page in which it appears: <strong>action=&quot;jsp1.jsp.&quot;</strong> In other words, a click on the <strong>submit </strong>button in the form will end up modifying this page, and not some other page. Included in the form are an <strong>input</strong> field and a <strong>submit</strong> button. Notice that the value for the input field is supplied by the <strong>sample</strong> property in our Java bean. Pressing the <strong>submit</strong> button changes that value. </p>
+<p>In effect, the <strong>submit</strong> button completes our model-view architecture by adding a controller to it. The controller part of the model-view-controller architecture is the part that provides the communication between the model and view portions of the architecture. When the user clicks on the <strong>submit</strong> button that link is completed, and code inside the Java bean is called. This is a very simple example of how you can use an HTML file to tap into the logic supplied by Java application.</p>
+<p>Please remember that the HTML will be on the client side, and the Java class will be back on the server. In effect, the relationship between the HTML and the Java server code is the same as that between an HTML file and a CGI application. In particular, there is normally going to be a noticeable delay while the information in the HTML file is sent back to the server, processed by the Java Servlet code, and sent back to the user in the form of a new HTML page. In that sense, this architecture is the same as that found in a CGI application. The advantages of this technology over CGI technology are two fold:</p>
+<p>1) There is a very clean and intuited relationship between the HTML based JSP and the logic back on the server.</p>
+<p>2) The code on the server is kept in memory at all times, so there is no overhead of the type one usually finds when launching an instance of a CGI application. A delay will occur, however, the very first time the application is accessed. At that time, the Tomcat server combines the JSP page and the beans on the server to generate the source for a Java Servlet. It then compiles the Servlet and loads it into memory. There it will stay until the source is modified or the server is shut down. </p>
+<p>The end result is a very fast, very powerful, web application that is easy to build and at least potentially easy to maintain. That ease of maintenance is in large part dependent on the developers willingness to maintain a separation between the presentation and logic layers of the JSP. </p>
+<h2>Summary</h2>
+<p>This article has introduced the main concepts on which the JavaServer Pages architecture is based. It has also shown you how to use JBuilder to easily create a sample JavaServer Page. </p>
+<p>A major focus of this article was to show you the basic syntax of a simple JSP application. While exploring that syntax, you learned that the JSP architecture is based on the Java Servlet technology. </p>
+<p>Another primary focus of this article was to explain how the JSP technology supports the model-view-controller architecture. In particular, you have seen that a file with a <strong>jsp</strong> extension contains HTML and forms the presentation portion of your application. A second file, containing Java code, contains the logic for your application. Of course, a large web application will likely contain many HTML and Java files. However, the basic architecture on which those applications is based has been introduced in this article. Future articles in this series will focus on the many features found in a JSP or Servlet based application. </p>
+<p>I will close with a warning. This article has given you just enough information to make you dangerous. Future articles will give you the information you need to correctly architect web applications that are robust and maintainable. </p>
+<p><a href="http://www.falafelsoft.com"><img src="Falafel.jpg" width="170" height="97"></a></p>
+</body>
+</html>

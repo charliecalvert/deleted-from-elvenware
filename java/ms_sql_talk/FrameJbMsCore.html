@@ -1,0 +1,332 @@
+<HTML>
+<head>
+    <STYLE>
+    BODY {background-color: lightyellow}
+	H1 {font-size: x-large}
+	H2 {font-size: x-large}
+    P {font-size: x-large}
+    LI {font-size: x-large}
+    .blues {color: "magenta"}
+    </STYLE>
+</head>
+<BODY>
+<h1>Leveraging the Power and Simplicity of SQL Server with JBuilder  </h1>
+
+<p>Alain Tadros and Charlie Calvert from Falafel Software, Inc.</p>
+<hr>
+<h2><a name="Overview"></a></h2>
+
+<h2>Overview</h2>
+
+<p>Demonstrate MS SQL Server working with JBuilder 9.</p>
+<p>The session primarily uses SQL Server 2000 and the Microsoft JDBC Driver for 
+  building datacentric applications. </p>
+<p>We will end with a brief discussion of how "Yukon" provides more interoperability options by supporting 
+  connectivity through Web Services.</p>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<p><a name="AboutDriver"></a></p>
+
+
+<h2>About the Driver</h2>
+
+<p>This is a JDBC level 4 driver, which means it is written completely in Java.</p>
+
+<p>The Sun ODBC-JDBC bridge is very convenient, but it is a level 1 driver. 
+  As a result, it has to thunk back and forth between ODBC and Java, and will 
+  be slow.</p>
+  
+<p>ODBC is also not as readily available on Linux or Solaris as it is on Windows.</p>
+
+<p>For performance and convenience, what you want is a good Level 4 driver like the
+one we will talk about today.</p>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<h2><a name="ObtainDriver"></a></h2>
+<h2>Obtaining the driver.</h2>
+<ul>
+  <li>If you register for a free .NET Passport then the driver is free and you 
+    can download it from the Microsoft site.</li>
+  <li>All things MS SQL are found at <a href="http://www.microsoft.com/sql/">http://www.microsoft.com/sql/.</a></li>
+  <li>The driver, at the time this was written, is here: <a href="http://www.microsoft.com/sql/downloads/jdbcregister.asp">http://www.microsoft.com/sql/downloads/jdbcregister.asp</a></li>
+</ul>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<h2><a name="JDBCDriver"></a></h2>
+<h2>Setting up the JDBC Driver in JBuilder</h2>
+<p>Article <a href="ms_sql_jdbc/MSSQLServerConnection.html" title="Connection Text" target="_top">Connection 
+  Text</a></p>
+<p>Choose <strong>Tools | Enterprise Setup</strong> to select the lib files from 
+  the install. </p>
+<p>This creates a library in the lib/ext directory.</p>
+<p>Restart JBuilder.</p>
+<p>Choose Tools | Database Pilot to bring up the Pilot</p>
+<p>In the Database Pilot, choose <strong>View | Options</strong> and specify the 
+  main class in the Driver: <strong>com.microsoft.jdbc.sqlserver.SQLServerDriver</strong>.</p>
+<p>Specify a sample URL: <strong>microsoft:sqlserver://MyServer:1433;databaseName=MyDB. 
+  </strong> </p>
+<p>(Beware the jdbc.jdbc issue.)</p>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<h2><a name="Connection"></a></h2>
+<h2>Creating a Connection the Database Pilot.</h2>
+<p>Choose File | New in the Database Pilot.</p>
+<p>Select the driver labeled <strong>com.microsoft.jdbc.sqlserver.SQLServerDriver</strong>.</p>
+<p>Specify the connection URL: </p>
+<p><strong>jdbc:microsoft:sqlserver://localhost:1433;databaseName=Northwind</strong></p>
+<p>You can also specify the user name at this point.</p>
+<p>At this stage should be able to connect to the database.</p>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+    <h2><a name="StandardApplication"></a></h2>
+
+<h2>Creating a Standard Application that accesses MS SQL Server</h2>
+  
+<ol>
+  <li>Start a new project, but do not create an application.</li>
+  <li>Choose <strong>File | New | DataModule</strong> from the JBuilder menu.</li>
+  <li>Accept the default package and class name, or type in appropriate values.</li>
+  <li>Select the Invoke the Data Modeler menu option. Click Ok.</li>
+  <li>In the Data Modeller, select the Employees table and choose <strong>Copy 
+    All</strong>.</li>
+  <li>Choose <strong>File | Save</strong> and then <strong>File | Exit.</strong></li>
+  <li>Select <strong>File | New</strong> from the JBuilder menu and select <strong>Datamodule 
+    Application</strong>.</li>
+  <li>Take all the defaults, but make sure your data module is selected before 
+    clicking Ok.</li>
+  <li>Right click on DataModule1TwoTierApp in the project pane and choose Run.</li>
+  <li>Optionally set up a runtime configuration.</li>
+</ol>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<a name="OneToMany"></a>
+
+<h2>One To Many</h2>
+
+<OL>
+<li>Create a new data module as described above. </li>
+
+<li>Choose Customer table and copy all.</li>
+<li>Choose Query | Add Query.</li>
+<li>Select the Orders table and choose Copy All.</li>
+<li>In the queries section drag the mouse between the Customer and Orders table.</li>
+<li>A dialog will pop up. Select all the defaults and choose Ok.</li>
+<p>Choose File | Save and then File | Exit.</p>
+</OL>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<p><a name="JApplet"></a></p>
+<h2>Creating a JApplet that accesses MS SQL Server</h2>
+<p>Create a default JBuilder JApplet.</p>
+<p>Choose Applet1.java and select Wizards | Use Datamodule. Accept all the defaults 
+  and click Ok.</p>
+<p>Switch to design mode and drop down a TableScrollPane, a JdbTable, </p>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<h2><a name="Servlet"></a></h2>
+<h2>Creating a Servlet that accesses MS SQL Server</h2>
+<ul>
+  <li>File New Project</li>
+  <li>File New Web App</li>
+  <li>File New Servlet. Make sure both doGet and doPost are selected.</li>
+  <li>Right click and run.</li>
+  <li>In the servlet, go into design mode on the Servlet and drop down a Database 
+    and QueryDataSet and hook them both up to the Employee table from Northwinds.</li>
+  <li>Turn to the Internet Beans page in the Component Pallet.</li>
+  <li>Drop down an IxPageProducer</li>
+  <li>Hook it up to an HTML file. Here is the <a href="SimpleJBuilderServlet.html#HTMLData">HTML.</a></li>
+  <li>Drop down an IxControl and hook it up to the PageProducer, the QueryDataSet. 
+    Set the controlName to first and set the columnName to FirstName</li>
+  <li>Drop down an IxControl and hook it up to the LastName field.</li>
+  <li>Drop down an IxSubmit button and hook it up to the PageProducer and set 
+    its controlName to next.</li>
+  <li>Turn to the events page and set up the code shown in <a href="SimpleJBuilderServlet.html#Listing02">Listing 
+    2</a>. </li>
+</ul>
+<p>Described in this <a href="SimpleJBuilderServlet.html">file</a>.</p>
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<p><a name="CreateDatabase"></a></p>
+<h2>Creating a Database</h2>
+<pre>USE master
+CREATE DATABASE foobar
+ON PRIMARY
+(NAME=foobar_data,
+FILENAME='c:\temp\foobar.mdf',
+SIZE=100,
+MAXSIZE=200,
+FILEGROWTH=25)
+LOG ON
+(NAME = foobar_log,
+FILENAME='c:\temp\foobar_log.ldf',
+SIZE=200,
+MAXSIZE=500,
+FILEGROWTH=50)</pre>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<h2><a name="CreateTable"></a></h2>
+<h2>Creating a Table</h2>
+<pre>create table dbo.bar
+(Data int NOT NULL,
+ DataName Varchar(25))</pre>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<p><a name="ModifyTable"></a></p>
+<h2>Modifying a table</h2>
+<pre>create CLUSTERED INDEX idx_foo ON dbo.bar(Data) on [PRIMARY]</pre>
+<hr>
+<p><a name="ModifyServer"></a></p>
+
+<h2>Modifying the server settings.</h2>
+
+<p>Open Pilot, connect to database: sp_configure</p>
+<p>sp_configure 'recovery interval', '5'</p>
+
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+<hr>
+<a name="RowID"></a>
+<h2>Metadata Update and Row ID Issue</h2>
+<p>Problem: You run your application, and get an error message about the MetaDataUpdate 
+  property and the RowID while trying to change data.</p>
+
+<ul>
+  <li>Select your QueryDataSet, in the Inspector, find the MetaDataUpdate property, 
+    and bring up the dialog associated with it.</li>
+  <li>Turn off the RowID checkbox.</li>
+  <li>Now go to the Structure Pane.</li>
+  <li>Select each of the fields of you table in turn, and set their RowID property 
+    to True.</li>
+  <li>Apparently all this works best if you are not changing the metadata in your 
+    database for this table.</li>
+</ul>
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+
+<a name="Bug"></a>
+<h2>Clonned Connection</h2>
+<p>Problem. You get this error: "Can't start a cloned connection while in manual transaction mode."</p>
+
+<p>Fix: Use Cursor as your SelectMethod in the connection string. Note the syntax for using Cursor as 
+the select method in the fix shown below.</p>
+
+<p>From the Microsoft site, (313181): "This error occurs when you try to execute multiple statements against 
+a SQL Server database with the JDBC driver while in manual transaction mode (AutoCommit=false) and 
+while using the direct (SelectMethod=direct) mode. Direct mode is the default mode for the driver."</p>
+
+<pre>import java.sql.*;
+import java.io.*;
+
+public class Repro{
+
+	public static void main(String args[])
+	{
+		try {
+			Connection con;
+			Statement s1 = null;
+			ResultSet r1 = null;
+			Statement s2 = null;
+			ResultSet r2 = null;
+			Class.forName("com.microsoft.jdbc.sqlserver.SQLServerDriver"); 
+			con = DriverManager.getConnection(
+				"jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=pubs;SelectMethod=Direct;User=User;Password=Password");
+			//fix 1
+				//"jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=pubs;SelectMethod=Cursor;User=User;Password=Password");
+			con.setAutoCommit(false);
+			
+			try {
+				s1 = con.createStatement();
+				r1 = s1.executeQuery("SELECT * FROM authors");
+				
+				//fix 2
+				//r1.close();
+				//s1.close();
+
+				s2 = con.createStatement();
+				r2 = s2.executeQuery("SELECT * FROM publishers");
+			}
+			catch (SQLException ex)
+			{
+				System.out.println(ex);				
+			}
+		
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+}</pre>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<h2><a name="StoredViews"></a></h2>
+<h2>Stored Procedures</h2>
+<h2>Views.</h2>
+
+<!--                                       -->
+<!--              New Section              -->
+<!--                                       -->
+
+<hr>
+<p><a name="AlternateDriver"></a></p>
+
+
+
+<h2>Alternate JDBC Driver</h2>
+
+<a href="http://www.inetsoftware.de/English/Produkte/JDBC_Overview/ms.htm" target="_top">http://www.inetsoftware.de/English/Produkte/JDBC_Overview/ms.htm</a>
+
+</BODY>
+</HTML>

@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>JBuilder Project untitled16.jpx</title>
+</head>
+<body>
+<p><img src="../../images/Elvenwarelogo.png"><br>
+</p>
+<p> <strong>Project: </strong> Assert Test<br>
+  <strong>Author: </strong><a href="http://www.elvenware.com/charlie">Charlie
+  Calvert</a><br>
+  <strong>Company: </strong><a href="http://www.elvenware.com">Elvenware</a><br>
+  <strong>Help: </strong><a href="../../index.html">index.html</a><br>
+</p>
+<hr>
+<p> <strong>Description: </strong>Assert Test</p>
+
+<p>You can turn on assertions for JDK 1.3.1 in JBuilder by turning to the General 
+  Page</p>
+<h3>Command line and Ant issues</h3>
+<p>Pass source=&quot;1.4&quot; to javac when compiling from the command line ot 
+  enable assertions.</p>
+<p>Pass -ea to java to turn the assertions on.</p>
+<p>Here is how to pass handle assertions this in Ant:</p>
+<pre>		&lt;javac srcdir=&quot;${src}&quot; destdir=&quot;${build}&quot; source=&quot;1.4&quot;/&gt;
+
+		&lt;java classname=&quot;${small-name}.${caps-name}&quot; fork=&quot;yes&quot;&gt;<br>			&lt;jvmarg value=&quot;-ea&quot;/&gt;<br>			&lt;classpath&gt;<br>				&lt;pathelement location=&quot;${project-jar}&quot;/&gt;<br>				&lt;pathelement path=&quot;${java.class.path}&quot;/&gt;<br>			&lt;/classpath&gt;<br>		&lt;/java&gt;
+
+
+This program is discussed in Chapter 29, on the debugger.</pre>
+</body>
+</html>

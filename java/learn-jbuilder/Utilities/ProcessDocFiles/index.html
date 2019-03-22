@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=windows-1252">
+  <title>Elvenware Project ProcessDocFiles</title>
+
+</head>
+<body>
+<p><img src="../../images/Elvenwarelogo.png"><br>
+</p>
+<p> <strong>Project: </strong>Process Doc Files<br>
+  <strong>Author: </strong><a href="http://www.elvenware.com/charlie">Charlie
+  Calvert</a><br>
+  <strong>Company: </strong><a href="http://www.elvenware.com">Elvenware</a><br>
+  <strong>Help: </strong><a href="../../index.html">index.html</a><br>
+<strong>CodeBox trouble: </strong><a href="../../index.html#codebox">index.html
+on codebox</a><br>
+<strong>Personal Edition: </strong>true<br>
+</p>
+<hr>
+<p><strong>Description: </strong>This Windows based utility is designed
+to help with the development of this book. It creates a VB script list of
+all the doc files in my book. Word then uses a macro to convert the doc files
+to html. The issue was that there were so many files I wanted a way to automate
+the process of creating VB code that calls the SaveAsHtml method shown below.<br>
+</p>
+<p>Below you will find the VB code for Word. The first method is
+the conversion macro and the second method is an excerpt from the method
+that is created by this program. You take that method, and then copy it into
+word.</p>
+<pre>Sub SaveAsHtml(oldName$, newName$)
+'
+'
+'    ChangeFileOpenDirectory "C:\temp\jbuilderBook-02\"
+	 Documents.Open FileName:=oldName, ConfirmConversions:=False, ReadOnly _
+		:=False, AddToRecentFiles:=False, PasswordDocument:="", PasswordTemplate _
+		:="", Revert:=False, WritePasswordDocument:="", WritePasswordTemplate:="" _
+		, Format:=wdOpenFormatAuto
+	ActiveDocument.SaveAs FileName:=newName, FileFormat:=wdFormatHTML, _
+		LockComments:=False, Password:="", AddToRecentFiles:=True, WritePassword _
+		:="", ReadOnlyRecommended:=False, EmbedTrueTypeFonts:=False, _
+		SaveNativePictureFormat:=False, SaveFormsData:=False, SaveAsAOCELetter:= _
+		False
+	ActiveWindow.View.Type = wdWebView
+	ActiveDocument.Close
+End Sub</pre>
+
+<pre>Sub doIt()
+'  Data = "C:\temp\jbuilderBook-02\TOC-02.doc"
+'  newData = "C:\temp\jbuilderBook-02\TOC-02.htm"
+'  Call SaveAsHtml(Data, newData)
+
+	SaveAsHtml oldName:="C:\temp\jbuilderBook-02\applets\javadoc\index.doc",
+		newName:="C:\temp\jbuilderBook-02\applets\javadoc\index.html"
+	SaveAsHtml oldName:="C:\temp\jbuilderBook-02\applets\javadoc\Scraps.doc",
+		newName:="C:\temp\jbuilderBook-02\applets\javadoc\Scraps.html"
+</pre>
+<pre>End Sub</pre>
+<hr>
+
+</body>
+</html>

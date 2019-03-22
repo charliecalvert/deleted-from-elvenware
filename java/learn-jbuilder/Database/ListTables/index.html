@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Elvenware Project LookUp</title>
+</head>
+<body>
+<p><img src="../../images/Elvenwarelogo.png"><br>
+</p>
+<p> <strong>Project: </strong>LookUp<br>
+  <strong>Author: </strong><a href="http://www.elvenware.com/charlie">Charlie 
+  Calvert</a><br>
+  <strong>Company: </strong><a href="http://www.elvenware.com">Elvenware</a><br>
+  <strong>Help: </strong><a href="../../index.html">index.html</a><br>
+</p>
+<hr>
+<p> <strong>Description: </strong>Shows a lookup between the Album table and the 
+  Types, Loudness and Medium Tables.</p>
+<p>The goal of this technology is to perform a link a column in one table with
+  a dataset from another table. Think of the classic example of rating a movie
+  on a scale of 1 to 5 stars. One star means bad, two starts ok, three good, four
+  stars great, five stars and its an a classic. In your main table you store the
+  values one to five. But in you want to show to the user the words, bad, oky,
+  good, great, and classic. These later values are stored in a second table:</p>
+
+<pre>
+  Code StrValue
+  1    bad
+  2    ok
+  3    good
+  4    great
+  5    classic
+</pre>
+
+  <p>The second table will be called a lookup list, or pick list. A pick list is a
+  synonym for a lookup list. </p>
+
+  <p> The parameters here are tricky. The first is the dataset containing the
+  lookup values. The second is the column in the lookup list that the link
+  is make on. For instance, in the 1 to 5 list above, that would be the
+  CODE column. The next two columns are from the master list. The fifth
+  colunmn is the name of the column in the master list to display on.</p>
+<pre>
+	columnTypes.setPickList(
+		new com.borland.dx.dataset.PickListDescriptor(
+		queryDataSetTypes,			// The dataset containing the lookup values.
+		new String[] {"CODE"},		// The link column in the pick list.
+		new String[] {"TYPES"},		// The master column to display in.
+		new String[] {"TYPES"},		// The master column to associate on
+		"TYPES",					// The column from the pick list to display
+		true));
+
+</pre>
+<hr>
+<p>This program is discussed in Chapter 41, on database basics, in Chapter 43, 
+  on database strategies, and in Chapter 45 on SQL queries.</p>
+</body>
+</html>

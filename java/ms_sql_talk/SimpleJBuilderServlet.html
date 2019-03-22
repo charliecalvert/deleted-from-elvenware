@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<h1>Basic Servlet in JBuilder 
+</h1>
+<ul>
+  <li>File New Project</li>
+  <li>File New Web App</li>
+  <li>File New Servlet. Make sure both doGet and doPost are selected.</li>
+  <li>Right click and run.</li>
+  <li>In the servlet, go into design mode on the Servlet and drop down a Database 
+    and QueryDataSet and hook them both up to the Employee table from Northwinds.</li>
+  <li>Turn to the Internet Beans page in the Component Pallet.</li>
+  <li>Drop down an IxPageProducer</li>
+  <li>Hook it up to an HTML file. Here is the <a href="#HTMLData">HTML.</a></li>
+  <li>Drop down an IxControl and hook it up to the PageProducer, the QueryDataSet. 
+    Set the controlName to first and set the columnName to FirstName</li>
+  <li>Drop down an IxControl and hook it up to the LastName field.</li>
+  <li>Drop down an IxSubmit button and hook it up to the PageProducer and set 
+    its controlName to next.</li>
+  <li>Turn to the events page and set up the code shown in <a href="#Listing02">Listing 
+    2</a>. </li>
+</ul>
+<p>&nbsp;</p>
+<p>Listing 1: The source code to the applet. Review the doGet and doPost methods. </p>
+<pre>package untitled10;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+
+/**
+ * &lt;p%gt;Title: &lt;/p%gt;
+ * &lt;p%gt;Description: &lt;/p%gt;
+ * &lt;p%gt;Copyright: Copyright (c) 2003&lt;/p%gt;
+ * &lt;p%gt;Company: &lt;/p%gt;
+ * @author not attributable
+ * @version 1.0
+ */
+
+public class Servlet1 extends HttpServlet
+{
+  private static final String CONTENT_TYPE = "text/html";
+  //Initialize global variables
+  int connections = 0;
+  public void init() throws ServletException
+  {
+  }
+  //Process the HTTP Get request
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+    //User Name
+    String userName = request.getParameter("UserName");
+    if (userName == null)
+    {
+      userName = "User1";
+    }
+    response.setContentType(CONTENT_TYPE);
+    PrintWriter out = response.getWriter();
+    out.println("&lt;html&gt;");
+    out.println("&lt;head&gt;&lt;title&gt;Servlet1&lt;/title&gt;&lt;/head&gt;");
+    out.println("&lt;body bgcolor=\"#ffff00\"&gt;");
+    out.println("&lt;FORM METHOD=POST ACTION=\"/MyApp2/servlet1\"&gt;");
+    out.println("&lt;p&gt;The servlet has received a GET. This is the reply.&lt;/p&gt;");
+    out.println("&lt;input type=\"text\" name=\"UserName\"&gt;");
+    out.println("&lt;input type=\"text\" name=\"last\"&gt;&lt;br&gt;");
+    out.println("&lt;input type=\"submit\"&gt;");
+    out.println("&lt;/body&gt;&lt;/html&gt;");
+  }
+  //Process the HTTP Post request
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+    System.out.println("Do post called");
+     String userName = request.getParameter("UserName");
+
+     if (userName == null)
+     {
+       userName = "User!";
+     }
+
+     response.setContentType(CONTENT_TYPE);
+     PrintWriter out = response.getWriter();
+     out.println("&lt;html&gt;");
+     out.println("&lt;h1&gt;Servlet1 doPost method&lt;/h1&gt;");
+     out.println("&lt;body&gt;");
+     out.println("&lt;p&gt;Thanks for visiting, ");
+     out.println(userName);
+     out.println("&lt;p&gt;Hello world - my first Java servlet program! ");
+     out.println("&lt;p&gt;You are visitor number ");
+     out.println(Integer.toString(++connections));
+     out.println("&lt;/body&gt;&lt;/html&gt;");
+
+     doGet(request, response);
+  }
+  //Clean up resources
+  public void destroy()
+  {
+  }
+}
+</pre>
+
+<h2>Database Driven Example</h2>
+<p><a name="Listing02"></a></p>
+
+<pre>
+
+package untitled4;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+import com.borland.dx.sql.dataset.*;
+import com.borland.internetbeans.*;
+import com.borland.dx.dataset.DataSet;
+
+public class Servlet1 extends HttpServlet
+{
+  private static final String CONTENT_TYPE = "text/html";
+  Database database1 = new Database();
+  QueryDataSet queryDataSet1 = new QueryDataSet();
+  IxPageProducer ixPageProducer1 = new IxPageProducer();
+  IxControl ixControl1 = new IxControl();
+  IxControl ixControl2 = new IxControl();
+  IxSubmitButton ixSubmitButton1 = new IxSubmitButton();
+  //Initialize global variables
+  public void init() throws ServletException
+  {
+  }
+  //Process the HTTP Get request
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+    ixPageProducer1.servletGet(this, request, response);
+  }
+  //Process the HTTP Post request
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+    ixPageProducer1.servletPost(this, request, response);
+    doGet(request, response);
+  }
+  //Clean up resources
+  public void destroy()
+  {
+  }
+
+  public Servlet1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+  private void jbInit() throws Exception
+  {
+    ixControl1.setColumnName("FirstName");
+    ixControl1.setDataSet(queryDataSet1);
+    ixControl1.setControlName("first");
+    ixControl2.setColumnName("LastName");
+    ixControl2.setDataSet(queryDataSet1);
+    ixControl2.setControlName("last");
+    ixSubmitButton1.setControlName("next");
+    ixSubmitButton1.addSubmitListener(new Servlet1_ixSubmitButton1_submitAdapter(this));
+    ixSubmitButton1.setPageProducer(ixPageProducer1);
+    ixControl2.setPageProducer(ixPageProducer1);
+    ixControl1.setPageProducer(ixPageProducer1);
+    ixPageProducer1.setHtmlFile("C:\\temp\\untitled4\\src\\untitled4\\DataRaw.html");
+    queryDataSet1.setQuery(new com.borland.dx.sql.dataset.QueryDescriptor(database1, "SELECT Employees.EmployeeID,Employees.LastName,Employees.FirstName,Employees.Title,Employees.TitleOfC" +
+      "ourtesy,Employees.BirthDate,Employees.HireDate,Employees.Address,Employees.City,Employees.Region,Empl" +
+      "oyees.PostalCode,Employees.Country,Employees.HomePhone,Employees.Extension,Employees.Photo,Employees." +
+      "Notes,Employees.ReportsTo,Employees.PhotoPath FROM Northwind.dbo.Employees", null, true, Load.ALL));
+    database1.setConnection(new com.borland.dx.sql.dataset.ConnectionDescriptor("jdbc:microsoft:sqlserver://localhost:1433;databaseName=Northwind", "sa", "foo", false, "com.microsoft.jdbc.sqlserver.SQLServerDriver"));
+    database1.setDatabaseName("");
+  }
+
+  void ixSubmitButton1_submitPerformed(SubmitEvent e)
+  {
+    System.out.println("Submit performed.");
+       DataSet ds = ixPageProducer1.getSessionDataSet(e.getSession());
+       ds.post();
+       ds.saveChanges();
+       ds.next();
+
+  }
+}
+
+class Servlet1_ixSubmitButton1_submitAdapter implements com.borland.internetbeans.SubmitListener
+{
+  Servlet1 adaptee;
+
+  Servlet1_ixSubmitButton1_submitAdapter(Servlet1 adaptee)
+  {
+    this.adaptee = adaptee;
+  }
+  public void submitPerformed(SubmitEvent e)
+  {
+    adaptee.ixSubmitButton1_submitPerformed(e);
+  }
+}</pre>
+
+<hr>
+<a name="HTMLData"></a>
+<p>The html file:</p>
+<pre>
+&lt;HTML&gt;
+&lt;HEAD>
+	&lt;TITLE&gt;Title&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;form action="/MargieApp/servlet1" method="post"&gt;
+&lt;input type="text" name="first"&gt;
+&lt;input type="text" name="last"&gt;&lt;br&gt;
+&lt;input type="submit" name="next" name="next" value="Next"&gt;
+&lt;input type="submit" name="prior" name="prior" value="Prior"&gt;
+&lt;/form&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+
+</body>
+</html>

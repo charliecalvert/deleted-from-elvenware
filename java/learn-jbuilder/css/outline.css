@@ -1,0 +1,212 @@
+@page { margin-left: 1.25in; margin-right: 1.25in; margin-top: 1in; margin-bottom: 1in }
+
+Div.biggest
+{
+        font-size: 26pt;
+}
+
+Div.big
+{
+        font-size: 24pt;
+}
+
+A{
+Color :Green;
+Text-Decoration : none;
+}
+TABLE {
+	background-color : Silver;
+}
+
+A:Hover{
+Color : Gold;
+Text-Decoration : none;
+}
+
+A:Active{
+Color : Crimson;
+Text-Decoration : none;
+}
+
+A:Visited{
+Color : CadetBlue;
+Text-Decoration : none;
+}
+
+BODY {
+	linkColor: Black;
+	vlink: lightblue;
+	alink: lightblue;
+}
+
+CITE{
+	text-decoration : underline;
+	font-style : normal;
+}
+
+H1.outline 
+{
+    font-size: 20pt;
+}
+
+H2.outline 
+{
+        font-size: 18pt;
+}
+
+H3.outline {
+        font-size : 16pt;
+}
+
+H4.outline 
+{
+    font-size: 14pt;
+}
+
+H5.outline 
+{
+        font-size: 10pt;
+}
+
+H1 {
+    margin-bottom: 0.08in;
+    font-family: "helvetica", sans-serif;
+    font-size: 26pt;
+}
+
+H2 {
+    margin-bottom: 0.08in;
+    font-family: "helvetica", sans-serif;
+    font-size: 24pt;
+    font-style: normal;
+}
+
+H3 {
+    margin-bottom: 0.08in;
+    font-family: "helvetica", sans-serif;
+    font-size : 22pt;
+    font-style : normal;
+}
+
+H4 {
+    margin-bottom: 0.08in;
+    font-family: "helvetica", sans-serif;
+    font-size: 20pt;
+    font-style: normal;
+}
+
+H5 {
+    margin-bottom: 0.08in;
+    font-family: "helvetica", sans-serif;
+    font-size: 18pt;
+    font-style : normal;
+}
+
+LI {
+	font-family: serif;
+	font-size: medium;
+	color:Black;
+}
+
+LI.big {
+ font-family: "helvetica", monospace;
+ font-size:25;
+ color:Black;
+ padding-bottom : 5px;
+ padding-top : 5px;
+}
+
+LI.medium 
+{
+        font-size: 18;
+}
+
+LI.outline3 
+{
+        font-size: 22;
+}
+
+LI.outline4 
+{
+        font-size: 20;
+}
+
+li.so {
+margin-bottom: 0in;
+color:green;
+}
+
+LI.hiValue {list-style-type: square; color: red}
+
+pre {
+	font-size:14pt;
+	color: Black;
+	background: #BDE8F6;
+	font-family : monospace;
+}
+
+P {
+	color:Black;
+	font-family: "Times New Roman";
+	font-size:14pt;
+}
+
+P.code {
+    margin-left: 0in;
+    margin-bottom: 0in;
+    font-family: "courier new", monospace;
+    font-size: 14pt;
+    padding-bottom : 0px;
+    padding-top : 0px;
+    margin-top : 0px;
+}
+
+P.figure{
+	font-family: "Courier New", Courier, monospace;
+	background : transparent;
+	font-size: 16pt;
+	font-style : bold;
+	color:Green;
+	background:lightyellow;
+}
+
+P.listing{
+	font-family: "Courier New", Courier, monospace;
+	background : transparent;
+	font-size: 16pt;
+	font-style : bold;
+	color:Black;
+	background-color : lightyellow;
+}
+
+P.note {
+	font-family:AGaramond;
+	font-size: 14pt;
+	font-style: normal;
+	background-color : #BDE8F6;
+}
+
+P.li {
+  margin-bottom: 0in;
+}
+
+P.hiValue
+{
+        color: blue;
+}
+
+SPAN.hiValue
+{
+        color: blue;
+}
+
+TD {
+    margin-bottom: 0.08in;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    widows: 2;
+    orphans: 2
+    color:#00FFFF;
+    background:lightyellow;
+}
+

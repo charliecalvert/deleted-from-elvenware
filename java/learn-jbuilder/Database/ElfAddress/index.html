@@ -1,0 +1,93 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><!-- #BeginTemplate "/Templates/index.dwt" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- #BeginEditable "doctitle" --> 
+<title>Elvenware Project ElfAddress</title>
+<!-- #EndEditable -->
+</head>
+
+<body bgcolor="#FFFFFF" >
+<p><img src="../../images/Elvenwarelogo.png"><br>
+</p>
+<p> <strong>Project: </strong><!-- #BeginEditable "ProjectName" -->ElfAddress<!-- #EndEditable --><br>
+  <strong>Author: </strong><a href="http://www.elvenware.com/charlie">Charlie 
+  Calvert</a><br>
+  <strong>Company: </strong><a href="http://www.elvenware.com">Elvenware</a><br>
+  <strong>Help: </strong><a href="../../index.html">index.html</a><br>
+</p>
+<hr>
+<p> <strong>Description: </strong><!-- #BeginEditable "Description" --><!-- #EndEditable --> 
+</p>
+
+<hr>
+<p>This <!-- #BeginEditable "programname" -->program<!-- #EndEditable --> is <!-- #BeginEditable "notfield" --><!-- #EndEditable -->discussed 
+  in <!-- #BeginEditable "ChapterName" -->Chapter 43, on database strategies, 
+  and in Chapter 45, on SQL queries.<!-- #EndEditable --></p>
+
+<p>If you have trouble running this program, <a href="../../index.html">index.html</a>
+    contains useful information about setting up the code that comes with
+this book.</p>
+ 
+<!-- #BeginEditable "FurtherDescription" --> 
+<p>Creating the stored procedure. Enter as an SQL statement in IBConsoloe or the 
+  JBuilder Pilot:</p>
+<pre>CREATE GENERATOR ADDRESS_GEN;</pre>
+<p>Commit your work:</p>
+<pre>COMMIT;</pre>
+<p>Here is how to create the stored procedure. Again, you would enter this as 
+  an SQL statement in IBConcole or the JBuilder Pilot:</p>
+<pre>SET TERM ^;
+<p>CREATE PROCEDURE GETADDRESSGEN RETURNS (NUM INTEGER)
+AS
+BEGIN
+  NUM = GEN_ID(ADDRESS_GEN, 1);
+  SUSPEND;
+END ^
+COMMIT;</pre>
+<p>Now that you the InterBase stored procedure set up, you need to call it from 
+  JBuilder. Drop down a <b>ProcedureDataSet</b> from the DataExpress page. Select 
+  its <b>procedure</b> property to bring up the <b>Procedure</b> dialog. Set the 
+  <b>Database</b> field to the database you are using. (My code for allowing you 
+  to switch between multiple databases can make this more complicated than it 
+  would be normally. If you know you want to use InterBase, then just set up a 
+  normal Database connection. Or, if you prefer, you can set the database up temporarily 
+  then edit its generated code in the DataModules jbInit when you are done. Setting 
+  up the database properly will only change the <b>setConnection</b> line of code. 
+  You set the database up by choosing <b>database1</b> in the structure pane and 
+  then selecting the <b>connection</b> property.) After you have the Database 
+  set up, enter the following line of code and press the test button to make sure 
+  it works:</p>
+<pre>select * from GETADDRESSGEN</pre>
+<p>This code can be generated automatically if you use the <b>Browse procedures</b> 
+  button.</p>
+<p><img src="Procedures.png" width="433" height="439"></p>
+<p> If all is working correctly, you can go into edit mode and enter the following 
+  method in your data module:</p>
+<pre>    public int getNextCodeValue()<br>	{<br>		procedureDataSet1.executeQuery();<br>		int codeValue = procedureDataSet1.getInt(0);<br>		System.out.println(&quot;Next code value: &quot; + codeValue);<br>		return codeValue;<br>	}
+</pre>
+<p>Create an Adding event on the dataset you are using. In this case, the dataset 
+  is called <b>address</b>. You would therefore go into design mode, select the 
+  <b>address</b> component in the structure pane, then turn to the events page 
+  in the inspector, and create the following method on the <b>Adding</b> event:</p>
+<pre>
+	void address_adding(DataSet dataSet, ReadWriteRow newRow) throws Exception<br>	{<br>		System.out.println(&quot;adding&quot;);<br>		newRow.setInt(0, getNextCodeValue());<br>		try<br>		{<br>			newRow.setTimestamp(&quot;LASTUPDATE&quot;, System.currentTimeMillis());<br>		}<br>		catch (DataSetException ex)<br>		{<br>			System.out.println(ex);<br>		}<br>	}<br></pre>
+<p>And that is all you need to do. </p>
+<p>For me, the hardest part of this process was realizing that I had to call <b>newRow.setTimestamp</b> 
+  to set the LASTUPDATE field. I had a compulsion call <b>newRow.setDate</b>. 
+  The LASTUPDATE field is a field I have included in the database so that I can 
+  know when any particular field of the database was last modified. It should, 
+  therefore be updated when a new row is added, and then each time that row is 
+  edited.</p>
+<p>This program also eliminates the need to press the Save to Server button. If 
+  you press the checkmark save, or if you move off a record you have edited, then 
+  on the Added or Updated events, I call address.saveChanges(), which makes permanent 
+  any changes you have entered. This technique has pluses and minuses. It was 
+  what I prefer in most cases, but there are reasons for not doing it. Among the 
+  reasons for not doing it would be a desire to let the user easily roll back 
+  a set of changes, and cutting down on a network traffic.</p>
+<p>&nbsp;</p>
+<!-- #EndEditable --> 
+</body>
+<!-- #EndTemplate --></html>

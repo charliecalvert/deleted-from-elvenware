@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15">
+<title>
+Marker Applet Page
+</title>
+</head>
+<body>
+Simple truth table example<br>
+<applet
+  codebase = "."
+  code     = "truthtables.TruthTables.class"
+  archive  = "TruthTables.jar"
+  name     = "TruthTables"
+  width    = "640"
+  height   = "300"
+  hspace   = "0"
+  vspace   = "0"
+  align    = "middle"
+>
+</applet>
+
+<pre>
+public boolean implies(boolean value1, boolean value2)
+{
+	boolean value;
+
+	if (value2) return true;
+	if (!value1) return true;
+	if ((value1 == true) && (value2 == false)) return false;
+	// if ((value1 == true) && (value2 == true)) return true;
+	return true;
+}
+
+public void truth(int row, boolean value1, boolean value2)
+{
+	TruthTableModel model = (TruthTableModel)jTable1.getModel();
+
+	model.setValueAt(String.valueOf(value1), row, 0);
+	model.setValueAt(String.valueOf(value2), row, 1);
+
+	model.setValueAt(String.valueOf(!value1), row, 2);
+
+	boolean value = value1 & value2;
+	model.setValueAt(String.valueOf(value), row, 3);
+
+	value = value1 | value2;
+	model.setValueAt(String.valueOf(value), row, 4);
+
+	value = implies(value1, value2);
+	model.setValueAt(String.valueOf(value), row, 5);
+
+	value = (value1 == value2);
+	model.setValueAt(String.valueOf(value), row, 6);
+
+	value = value1 ^ value2;
+	model.setValueAt(String.valueOf(value), row, 7);
+}
+
+</pre>
+</body>
+</html>

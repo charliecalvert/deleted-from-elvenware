@@ -1,0 +1,34 @@
+
+<HTML>
+<HEAD>
+<TITLE>Elvenware Project TimeIt02</TITLE>
+</HEAD>
+
+<BODY>
+<H1><img src="../../images/Elvenwarelogo.png"> </H1>
+<p> <strong>Project: </strong>Time It Two<br>
+  <strong>Author: </strong><a href="http://www.elvenware.com/charlie">Charlie
+  Calvert</a><br>
+  <strong>Company: </strong><a href="http://www.elvenware.com">Elvenware</a><br>
+  <strong>Help: </strong><a href="../../index.html">index.html</a></p>
+  <strong>Personal Edition: </strong>true<br>
+<hr>
+<p>This program is discussed in Chapter 25, the <a href="../../index.html/projects">Complex
+  Projects</a> chapter.</p>
+<p>This is a particular interesting example because of what is happening with
+  the classpath. As explained at length in the book, the ElfTimer.java file which
+  is key to this project is stored in the src directory beneath this directory.
+  In particular, it is outside the directory that hosts this project. One of the
+  main points of the Complex Projects chapter is to explain how to handle this
+  kind of situation inside of JBuilder. Here is code for handling this problem
+  in an Ant script:</p>
+<pre>		&lt;javac destdir=&quot;${build}&quot;&gt;<br>			&lt;src path=&quot;${src}&quot;/&gt;<br>			&lt;src path=&quot;$../src&quot;/&gt;<br>		&lt;/javac&gt;</pre>
+<p>Notice that the second src element points at the directory that holds the timeit.ElfTimer.java
+  component. </p>
+<p>If you are having trouble running this program,<a href="../../index.html">
+  index.html </a> provides useful information about setting up the code that comes
+  with this book.</p>
+
+
+</BODY>
+</HTML>

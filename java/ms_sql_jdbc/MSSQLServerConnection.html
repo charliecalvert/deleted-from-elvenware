@@ -1,0 +1,83 @@
+<HTML>
+
+<HEAD>
+	<TITLE>MS SQL Server Connectivity from JBuilder</TITLE>
+	<LINK REL="STYLESHEET" TYPE="TEXT/CSS" HREF="../../book.css">
+</HEAD>
+<BODY>
+
+<H1>MS SQL Server JDBC Connectivity from JBuilder </H1>
+
+<P>The article describes how to connect to MS SQL Server from JBuilder 
+using pure JDBC drivers.</P> 
+
+<P>The first step is to download the JDBC drivers from Microsoft's 
+site:</P>
+
+<P><A 
+HREF="http://www.microsoft.com/sql/downloads/jdbcregister.asp">http://www.microsoft.com/sql/downloads/jdbcregister.asp</A> 
+</P> 
+
+<P>You will probably have best luck doing this if you have a .NET 
+Passport:</P>
+
+<P><A HREF="http://www.passport.net/Consumer/">http://www.passport.net/Consumer/</A></P>
+
+
+<P>After downloading and installing the driver, the next step is to open 
+JBuilder 9 Enterprise edition. Select Tools | Enterprise Setup and 
+turn to the Database Drivers page. Press the add button. Create a new 
+library that points at the three jar files in the lib directory from 
+the Microsoft SQL Server JDBC install. After doing this, you will be 
+prompted to restart JBuilder.</P>
+
+<IMG SRC="Figure01.png">
+
+<P>Figure 1: Selecting the three MS SQL JDBC jar files used by the 
+JBuilder library.</P>
+
+<P>After JBuilder restarts, select Tools | Database Pilot. In the 
+Database Pilot, choose View | Options from the menu, and turn to the 
+Drivers page. Press the Add button and in the dialog shown in Figure 2 
+type in the following string:</P>
+
+<PRE>com.microsoft.jdbc.sqlserver.SQLServerDriver</PRE>
+
+<IMG SRC="Figure02.png">
+
+<P>Figure 2: Setting up your driver in the Database Pilot.</P>
+
+<P>You will also have a chance to type in a sample URL:</P>
+
+<PRE>jdbc:microsoft:sqlserver://MyServer:1433;databaseName=MyDB</PRE>
+
+<P>Now close the dialog and select File | New from the Database Pilot 
+main menu. Drop down the list of drivers. You should see your new driver 
+in a black font, as shown in Figure 3. Drivers that are not correctly 
+configured appear in a red font.</P>
+
+<IMG SRC="Figure03.png">
+
+<P>Figure 3: The MS SQL Server driver should appear in a black font.</P>
+
+<P>If your driver shows up in red, then you probably made a mistake in one 
+of the steps covered so far in this document.  In particular, the JBuilder 
+library does not point at the right jar files, or else you type in the 
+wrong class name in the dialog shown in Figure 2.</P> 
+
+<P>Select the Microsoft SQL Server driver. Type in a valid URL as 
+shown in Figure 4. The URL should be based on the sample URL shown 
+early in this document.</P>
+
+<IMG SRC="Figure04.png">
+
+<P>Figure 4: Type in a valid URL that specifies the name of your 
+server and your database name.<P>
+ 
+<P>Click the OK button and choose File | Apply from the Database Pilot 
+main menu to save your work.  Test your connection by choosing File | Open 
+from the menu.  You will be prompted for the user name and password for 
+your database.</P> 
+
+</BODY> 
+</HTML> 
